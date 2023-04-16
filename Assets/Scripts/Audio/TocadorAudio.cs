@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
 {
-    public List<string> listaFicheiros;
+    [SerializeField]
+    private List<string> listaFicheiros;
 
     [Range(0f, 1f)]
     public float volumeAudio;
@@ -24,6 +25,11 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
 
         carregador = new CarregadorAudio();
         carregador.carregarEvents.Add(this);
+    }
+
+    public void AdicionarMusica(string caminho)
+    {
+        listaFicheiros.Add(caminho);
         CarregarClips();
     }
 
@@ -67,8 +73,39 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
         audioSources.Add(asource);
     }
 
-    public void OnInteragir()
+    private void ApagarTudo()
     {
+        for(int i = 0; i < audioSources.Count; i++)
+        {
+            Destroy(audioSources[i].gameObject);
+        }
+        audioSources.Clear();
+
+        for (int i = 0; i < audioClips.Count; i++)
+        {
+            Destroy(audioClips[i]);
+        }
+        audioClips.Clear();
+
+        listaFicheiros.Clear();
+
+        Debug.Log("Apagou todas as musicas");
+    }
+
+    public void OnInteragir(RatoBotao botao)
+    {
+        if (botao == RatoBotao.DIREITO)
+        {
+            ApagarTudo();
+            return;
+        }
+
+        if (audioClips.Count == 0)
+        {
+            Debug.LogWarning("Nao ha clips para tocar");
+            return;
+        }
+
         foreach (AudioSource s in audioSources)
         {
             if (s.isPlaying)

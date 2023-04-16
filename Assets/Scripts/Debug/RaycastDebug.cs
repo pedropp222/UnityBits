@@ -22,8 +22,8 @@ public class RaycastDebug : MonoBehaviour, IHoverable, IInteragivel
         GetComponent<Renderer>().material = hoverMaterial;
     }
 
-    public void OnInteragir()
+    public void OnInteragir(RatoBotao botao)
     {
-        Debug.Log("INTERAGIR");
+        Debug.Log("INTERAGIR COM BOTAO "+botao);
     }
 }
