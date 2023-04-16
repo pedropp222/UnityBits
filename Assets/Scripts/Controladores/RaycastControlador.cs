@@ -18,6 +18,8 @@ public class RaycastControlador : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Cursor.lockState != CursorLockMode.Locked) return;
+
         if (Physics.Raycast(camara.transform.position, camara.transform.forward, out hit, distanciaMaxima))
         {
             if (focusObject != hit.collider.gameObject)
@@ -43,11 +45,17 @@ public class RaycastControlador : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && focusObject != null)
+        if (Cursor.lockState != CursorLockMode.Locked) return;
+
+
+        bool button0 = Input.GetMouseButtonDown(0);
+        bool button1 = Input.GetMouseButtonDown(1);
+
+        if ((button0 || button1) && focusObject != null)
         {
             foreach (IInteragivel interagivel in focusObject.GetComponents<IInteragivel>())
             {
-                interagivel.OnInteragir();
+                interagivel.OnInteragir(button0?RatoBotao.ESQUERDO:RatoBotao.DIREITO);
             }
         }
     }

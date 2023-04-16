@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 public interface IInteragivel
 {
-    void OnInteragir();
+    void OnInteragir(RatoBotao botao);
 }

@@ -12,7 +12,7 @@ public class Jogador : MonoBehaviour, IPausable
     private MouseLook rato;
     public FirstPersonController fps;
 
-    void Start()
+    void Awake()
     {
         rato = fps.m_MouseLook;
     }
