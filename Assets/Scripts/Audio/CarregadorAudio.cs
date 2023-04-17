@@ -77,7 +77,7 @@ public class CarregadorAudio
     {
         if (caminho.IndexOf('.')!=-1)
         {
-            string ext = caminho.Split('.')[1];
+            string ext = caminho.Split('.')[^1];
 
             switch(ext)
             {
