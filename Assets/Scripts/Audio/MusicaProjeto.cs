@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface ICarregarEvent
+public class MusicaProjeto : MonoBehaviour
 {
-    void OnCarregouAudio(AudioClip clip);
+    public string projetoNome;
+
+
 }

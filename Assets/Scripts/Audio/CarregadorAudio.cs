@@ -69,7 +69,7 @@ public class CarregadorAudio
     {
         foreach(ICarregarEvent carregarEvent in carregarEvents) 
         {
-            carregarEvent.OnCarregouAudio(audio,caminho);
+            carregarEvent.OnCarregouAudio(audio);
         }
     }
 

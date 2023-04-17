@@ -8,53 +8,42 @@ using UnityEngine;
 public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
 {
     [SerializeField]
-    private List<string> listaFicheiros;
+    private string caminhoAtual;
 
     [Range(0f, 1f)]
     public float volumeAudio;
 
-    private List<AudioClip> audioClips;
-    private List<AudioSource> audioSources;
+    private AudioClip audioClip;
+    private AudioSource audioSource;
 
     private CarregadorAudio carregador;
 
     private void Start()
     {
-        audioClips = new List<AudioClip>();
-        audioSources = new List<AudioSource>();
-
         carregador = new CarregadorAudio();
         carregador.carregarEvents.Add(this);
     }
 
     public void AdicionarMusica(string caminho)
     {
-        listaFicheiros.Add(caminho);
-        CarregarClips();
-    }
-
-    private void CarregarClips()
-    {
-        if (audioClips.Count == listaFicheiros.Count)
+        if (caminhoAtual.Length == 0 || audioClip == null)
         {
-            return;
-        }
-
-        carregador.CarregarMusica(listaFicheiros[audioClips.Count]);
-    }
-
-    public void OnCarregouAudio(AudioClip clip, string cam)
-    {
-        if (clip == null)
-        {
-            listaFicheiros.Remove(cam);
+            caminhoAtual = caminho;
+            carregador.CarregarMusica(caminhoAtual);
         }
         else
         {
-            audioClips.Add(clip);
+            Debug.LogWarning("Este tocador ja tem uma musica adicionada.");
+        }
+    }
+
+    public void OnCarregouAudio(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            audioClip = clip;
             CriarAudioSource(clip);
         }
-        CarregarClips();
     }
 
     private void CriarAudioSource(AudioClip clip)
@@ -69,27 +58,21 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
         asource.playOnAwake = false;
 
         asource.SetCustomCurve(AudioSourceCurveType.Spread, AnimationCurve.Constant(0f, 1f, 0.2f));
-        
-        audioSources.Add(asource);
+
+        audioSource = asource;
     }
 
     private void ApagarTudo()
     {
-        for(int i = 0; i < audioSources.Count; i++)
+        if (audioSource != null)
         {
-            Destroy(audioSources[i].gameObject);
+            audioSource.Stop();
         }
-        audioSources.Clear();
 
-        for (int i = 0; i < audioClips.Count; i++)
-        {
-            Destroy(audioClips[i]);
-        }
-        audioClips.Clear();
+        Destroy(audioSource);
+        Destroy(audioClip);
 
-        listaFicheiros.Clear();
-
-        Debug.Log("Apagou todas as musicas");
+        Debug.Log("Apagou dados deste tocador");
     }
 
     public void OnInteragir(RatoBotao botao)
@@ -100,24 +83,22 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
             return;
         }
 
-        if (audioClips.Count == 0)
+        if (audioClip == null)
         {
-            Debug.LogWarning("Nao ha clips para tocar");
+            Debug.LogWarning("Nao tem audio para tocar");
             return;
         }
 
-        foreach (AudioSource s in audioSources)
+        if (audioSource.isPlaying)
         {
-            if (s.isPlaying)
-            {
-                Debug.Log("Parar audios");
-                s.Stop();
-            }
-            else
-            {
-                Debug.Log("Iniciar audios");
-                s.Play();
-            }
+            Debug.Log("Parar audio");
+            audioSource.Stop();
         }
+        else
+        {
+            Debug.Log("Iniciar audio");
+            audioSource.Play();
+        }
+
     }
 }
