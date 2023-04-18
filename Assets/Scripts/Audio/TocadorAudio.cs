@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
+public class TocadorAudio : MonoBehaviour, ICarregarEvent
 {
     [SerializeField]
     private string caminhoAtual;
@@ -62,7 +62,7 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
         audioSource = asource;
     }
 
-    private void ApagarTudo()
+    public void ApagarTudo()
     {
         if (audioSource != null)
         {
@@ -75,30 +75,12 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent, IInteragivel
         Debug.Log("Apagou dados deste tocador");
     }
 
-    public void OnInteragir(RatoBotao botao)
+    /// <summary>
+    /// Verificar se este tocador ta pronto a ser tocado ou se ainda nao tem nenhum clip
+    /// </summary>
+    /// <returns>Se ta pronto a tocar!</returns>
+    public bool ProntoATocar()
     {
-        if (botao == RatoBotao.DIREITO)
-        {
-            ApagarTudo();
-            return;
-        }
-
-        if (audioClip == null)
-        {
-            Debug.LogWarning("Nao tem audio para tocar");
-            return;
-        }
-
-        if (audioSource.isPlaying)
-        {
-            Debug.Log("Parar audio");
-            audioSource.Stop();
-        }
-        else
-        {
-            Debug.Log("Iniciar audio");
-            audioSource.Play();
-        }
-
+        return audioSource != null;
     }
 }

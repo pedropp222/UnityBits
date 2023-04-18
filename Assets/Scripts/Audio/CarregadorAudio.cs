@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 /// <summary>
-/// Carregar ficheiros de audio a partir de uma localizacao no disco
+/// Esta classe encarrega-se de carregar ficheiros de audio do disco. A partir de um caminho que fornecemos a esta classe,
+/// ela vai validar se se trata de um ficheiro válido e carrega então o ficheiro. Caso tudo corra bem, ela chama os eventos
+/// (ICarregarEvent) que estão a escutar este carregador, e este fornece o AudioClip, ou nulo.
 /// </summary>
 public class CarregadorAudio
 {
@@ -23,7 +25,7 @@ public class CarregadorAudio
     {
         if (!System.IO.File.Exists(caminho))
         {
-            Debug.LogError("ERRO: A LOCALIZACAO: " + caminho + " NAO EXISTE");
+            Debug.LogError("ERRO: A LOCALIZACAO: '" + caminho + "' NAO EXISTE");
             OnCarregouAudio(null);
             return;
         }
@@ -73,6 +75,11 @@ public class CarregadorAudio
         }
     }
 
+    /// <summary>
+    /// Obter o formato atraves do nome completo do ficheiro.
+    /// Apenas suporta mp3, wav e ogg, e ja chega muito bem.
+    /// </summary>
+    /// <returns>O tipo de audio que encontrou, ou entao "unknown"</returns>
     private AudioType TypeFromExtension()
     {
         if (caminho.IndexOf('.')!=-1)
