@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Interfaces\IPausable.cs" />
     <Compile Include="Assets\Scripts\Debug\RaycastDebug.cs" />
     <Compile Include="Assets\Scripts\Controladores\RaycastControlador.cs" />
+    <Compile Include="Assets\Scripts\Audio\Artista.cs" />
     <Compile Include="Assets\Assets Unity\Utility\FPSCounter.cs" />
     <Compile Include="Assets\Assets Unity\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\TargetFieldOfView.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Assets Unity\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\LookatTarget.cs" />
     <Compile Include="Assets\Scripts\Outros\SineScaler.cs" />
+    <Compile Include="Assets\Scripts\Controladores\UtilsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets Unity\Cameras\CameraGuidelines.txt" />

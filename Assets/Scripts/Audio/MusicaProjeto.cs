@@ -9,5 +9,5 @@ public class MusicaProjeto : MonoBehaviour
 {
     public string projetoNome;
 
-
+    public List<Artista> listaArtistas;
 }
