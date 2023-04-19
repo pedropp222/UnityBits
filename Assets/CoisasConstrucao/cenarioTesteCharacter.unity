@@ -3764,6 +3764,7 @@ GameObject:
   - component: {fileID: 1575558224}
   - component: {fileID: 1575558226}
   - component: {fileID: 1575558227}
+  - component: {fileID: 1575558228}
   m_Layer: 0
   m_Name: Sol
   m_TagString: Untagged
@@ -3875,6 +3876,19 @@ MonoBehaviour:
   objects:
   - {fileID: 244525998}
   invert: 1
+--- !u!114 &1575558228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575558223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c1fff223ba63842822160f8e44a87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TocadorMusicaPrefab: {fileID: 0}
 --- !u!1 &1599311464
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,6 +4969,7 @@ GameObject:
   - component: {fileID: 1573094378211905367}
   - component: {fileID: 4928896780624835515}
   - component: {fileID: 4928896780624835516}
+  - component: {fileID: 4928896780624835517}
   m_Layer: 2
   m_Name: pessoa
   m_TagString: Untagged
@@ -4970,7 +4985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853292432060625143}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -1.9991679, y: 2.3, z: 8.045997}
+  m_LocalPosition: {x: -1.9991679, y: 1.481, z: 8.045997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4995,8 +5010,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.7
-  m_Height: 4
+  m_Radius: 0.38
+  m_Height: 2.22
   m_Direction: 2
   m_Center: {x: 0, y: -0.028929826, z: 0.004392981}
 --- !u!114 &4928896780624835516
@@ -5012,5 +5027,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nomeArtista: 
-  canta: 0
-  tocadorBocaLocal: {x: 0, y: 1.5, z: -0.21}
+  instrumentos:
+  - {fileID: 4928896780624835517}
+--- !u!114 &4928896780624835517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853292432060625143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64eca76aa03e0474983d775c08fbaac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 
-public class Artista : MonoBehaviour
+public class Instrumento : MonoBehaviour
 {
-    public string nomeArtista;
-
-    public List<Instrumento> instrumentos;
+    private TocadorAudio tocador;
 
     private void Start()
     {
-
+        tocador = gameObject.AddComponent<TocadorAudio>();
     }
 }
+
