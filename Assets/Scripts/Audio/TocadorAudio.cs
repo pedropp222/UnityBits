@@ -14,7 +14,7 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent
     public float volumeAudio;
 
     private AudioClip audioClip;
-    private AudioSource audioSource;
+    public AudioSource audioSource { get; private set; }
 
     private CarregadorAudio carregador;
 
@@ -82,5 +82,21 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent
     public bool ProntoATocar()
     {
         return audioSource != null;
+    }
+
+    public void Tocar()
+    {
+        if (ProntoATocar())
+        {
+            audioSource.Play();
+        }
+    }
+
+    public void Parar()
+    {
+        if (ProntoATocar())
+        {
+            audioSource.Stop();
+        }
     }
 }
