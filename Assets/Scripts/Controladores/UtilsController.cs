@@ -29,7 +29,35 @@ public class UtilsController : MonoBehaviour
         else
         {
             Debug.LogError("ATENCAO: Existe mais do que um controlador global (UtilsController). So pode existir 1!");
+        }     
+    }
+
+    /// <summary>
+    /// Método recursivo para encontrar um objeto pelo seu nome, a partir de um Transform inicial
+    /// Claro que só pode haver 1 objeto com o nome que queres, senão pode não encontrar o que querias.
+    /// </summary>
+    /// <param name="inicio">O transform de onde vai iniciar a procura</param>
+    /// <param name="nome">O nome do objeto a encontrar</param>
+    /// <returns>O primeiro objeto que encontrou com esse nome ou entao Null se não encontrou nada</returns>
+    public GameObject EncontrarObjetoChild(Transform inicio, string nome)
+    {
+        for(int i = 0; i < inicio.childCount; i++)
+        {
+            if (inicio.GetChild(i).name == nome)
+            {
+                return inicio.GetChild(i).gameObject;
+            }
+            if (inicio.GetChild(i).childCount > 0)
+            {
+                GameObject obj = EncontrarObjetoChild(inicio.GetChild(i), nome);
+                
+                if (obj != null)
+                {
+                    return obj;
+                }
+            }
         }
-        
+
+        return null;
     }
 }
