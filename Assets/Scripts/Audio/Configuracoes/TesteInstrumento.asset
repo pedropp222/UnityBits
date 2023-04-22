@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ea0b900e6fa2d409c3e09a5422ef80, type: 3}
+  m_Name: TesteInstrumento
+  m_EditorClassIdentifier: 
+  parteCorpo: lowerJaw
+  volumeAudio: 1.66
+  intensidadeMovimento: 1.32
+  suavidadeMovimento: 0.249
+  transformacoesOssos:
+  - nomeParte: neckLower
+    rotacaoLocal: {x: 60, y: 0, z: 0}
+  - nomeParte: rShldrBend
+    rotacaoLocal: {x: 30.699997, y: 0, z: 65.81999}
+  - nomeParte: lShldrBend
+    rotacaoLocal: {x: 353.8, y: 0, z: 300.79}
+  - nomeParte: lShldrTwist
+    rotacaoLocal: {x: 23.43, y: 0, z: 0}
+  configuracoesInstanciacao:
+  - objeto: {fileID: 4379502537689129260, guid: 8e109b2a796c8414ca018e14f39d6695, type: 3}
+    nomeParente: 
+    posicaoLocal: {x: 5, y: 10, z: 15}
+    rotacaoLocal: {x: 20, y: 10, z: 50}
