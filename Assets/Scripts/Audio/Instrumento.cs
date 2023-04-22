@@ -13,6 +13,9 @@ using UnityEngine;
 /// </summary>
 public class Instrumento : MonoBehaviour
 {
+    [SerializeField]
+    private bool ativado;
+
     private TocadorAudio tocador;
 
     public MovimentoSom movimento;
@@ -22,14 +25,27 @@ public class Instrumento : MonoBehaviour
         tocador = gameObject.AddComponent<TocadorAudio>();
     }
 
-    //Começar a tocar o som deste instrumento, e dar ao MovimentoSom o AudioSource que precisa para fazer o seu movimento
+    /// <summary>
+    /// Começar a tocar o som deste instrumento, e dar ao MovimentoSom o AudioSource que precisa para fazer o seu movimento
+    /// So vai comecar a tocar se este instrumento estiver ativado (vai dar para ativar / desativar sons quando quiseres)
+    /// </summary>
     public void Tocar()
     {
-        if (tocador.ProntoATocar())
+        if (tocador.ProntoATocar() && ativado)
         {
             movimento.SetAudioSource(tocador.audioSource);
             tocador.Tocar();
         }
+    }
+
+    public void Ativar()
+    {
+        ativado = true;
+    }
+
+    public void Desativar()
+    {
+        ativado = false;
     }
 }
 

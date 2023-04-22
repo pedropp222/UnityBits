@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{20FA7901-6CF8-808E-47A1-F1E175CDA844}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -57,8 +56,8 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Audio\Instrumento.cs" />
     <Compile Include="Assets\Assets Unity\Utility\DynamicShadowSettings.cs" />
-    <Compile Include="Assets\Scripts\Audio\MovimentoSom.cs" />
     <Compile Include="Assets\Scripts\Controladores\PausaControlador.cs" />
     <Compile Include="Assets\Assets Unity\Utility\LerpControlledBob.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
@@ -99,11 +98,12 @@
     <Compile Include="Assets\Scripts\Eventos\Pausa\OnPause_ToggleObjects.cs" />
     <Compile Include="Assets\Assets Unity\Utility\FOVKick.cs" />
     <Compile Include="Assets\Scripts\Controladores\UtilsController.cs" />
+    <Compile Include="Assets\Scripts\Audio\MovimentoSom.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInteragivel.cs" />
     <Compile Include="Assets\Assets Unity\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\LookatTarget.cs" />
     <Compile Include="Assets\Scripts\Outros\SineScaler.cs" />
-    <Compile Include="Assets\Scripts\Audio\Instrumento.cs" />
+    <Compile Include="Assets\Scripts\Audio\InstrumentoConfiguracao.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets Unity\Cameras\CameraGuidelines.txt" />

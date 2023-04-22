@@ -14,11 +14,10 @@ using UnityEngine;
 [RequireComponent(typeof(Instrumento))]
 public class MovimentoSom : MonoBehaviour
 {
-    public Transform parte;
-    [Range(0f, 10f)]
-    public float intensidade;
-    [Range(0f,1f)]
-    public float suavidade;
+    private Transform parte;
+    
+    private float intensidade;
+    private float suavidade;
 
     private AudioSource audioS;
 
@@ -31,13 +30,13 @@ public class MovimentoSom : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        parte = transform;
         rotacaoInicial = parte.localEulerAngles.x;
-        rotAtual = rotacaoInicial;
-
+        rotAtual = rotacaoInicial;    
         espectro = new float[256];
     }
 
-    //Apenas o Instrumento vai chamar este metodo, quando o carregador finalmente carrega um som.
+    //Apenas o Instrumento vai ou pode chamar este metodo, quando o carregador finalmente carrega um som.
     public void SetAudioSource(AudioSource audio)
     {
         audioS = audio;
@@ -63,6 +62,16 @@ public class MovimentoSom : MonoBehaviour
         Vector3 novaRot = new Vector3(rotAtual, parte.localEulerAngles.y, parte.localEulerAngles.z);
 
         parte.localEulerAngles = novaRot;        
+    }
+
+    public void SetIntensidade(float valor)
+    {
+        intensidade = valor;
+    }
+
+    public void SetSuavidade(float valor)
+    {
+        suavidade = valor;
     }
 
 }
