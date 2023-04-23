@@ -69,7 +69,7 @@ namespace Controladores
                     }
                     else
                     {
-                        Debug.LogWarning("Nao encontrou som de passo para material: " + chao.name);
+                        //Debug.LogWarning("Nao encontrou som de passo para material: " + chao.name);
                     }
                 }
             }
