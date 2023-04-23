@@ -13,20 +13,18 @@ MonoBehaviour:
   m_Name: TesteInstrumento
   m_EditorClassIdentifier: 
   parteCorpo: lowerJaw
-  volumeAudio: 1.66
+  volumeAudio: 0.707
   intensidadeMovimento: 1.32
   suavidadeMovimento: 0.249
   transformacoesOssos:
-  - nomeParte: neckLower
-    rotacaoLocal: {x: 60, y: 0, z: 0}
-  - nomeParte: rShldrBend
-    rotacaoLocal: {x: 30.699997, y: 0, z: 65.81999}
-  - nomeParte: lShldrBend
-    rotacaoLocal: {x: 353.8, y: 0, z: 300.79}
-  - nomeParte: lShldrTwist
-    rotacaoLocal: {x: 23.43, y: 0, z: 0}
+  - nomeParte: pelvis
+    rotacaoLocal: {x: 273.79993, y: 180, z: 180}
+  - nomeParte: lShin
+    rotacaoLocal: {x: 0, y: 320.49002, z: 0}
+  - nomeParte: rShin
+    rotacaoLocal: {x: 0, y: 351.9, z: 0}
   configuracoesInstanciacao:
   - objeto: {fileID: 4379502537689129260, guid: 8e109b2a796c8414ca018e14f39d6695, type: 3}
-    nomeParente: 
-    posicaoLocal: {x: 5, y: 10, z: 15}
+    nomeParente: hip
+    posicaoLocal: {x: 0, y: 0, z: 0}
     rotacaoLocal: {x: 20, y: 10, z: 50}
