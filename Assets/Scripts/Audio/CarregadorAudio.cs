@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,6 @@ public class CarregadorAudio
     //O caminho completo do ficheiro a carregar! exemplo: C:/USERS/PEDRO/DESKTOP/PASTA/MUSICA.MP3
     private string caminho = "";
 
-    public List<ICarregarEvent> carregarEvents = new List<ICarregarEvent>();
-
     public void CarregarMusica(string caminho)
     {
         this.caminho = caminho;
@@ -26,7 +25,7 @@ public class CarregadorAudio
         if (!System.IO.File.Exists(caminho))
         {
             Debug.LogError("ERRO: A LOCALIZACAO: '" + caminho + "' NAO EXISTE");
-            OnCarregouAudio(null);
+            OnCarregouAudio?.Invoke(this, null);
             return;
         }
 
@@ -37,7 +36,7 @@ public class CarregadorAudio
         if (tipo == AudioType.UNKNOWN)
         {
             Debug.LogError("ERRO. O TIPO DE FICHEIRO E DESCONHECIDO. TEM QUE SER UM FICHEIRO DE AUDIO (MP3, WAV, OGG)");
-            OnCarregouAudio(null);
+            OnCarregouAudio?.Invoke(this, null);
             return;
         }
 
@@ -56,24 +55,18 @@ public class CarregadorAudio
                 if (clip != null)
                 {
                     Debug.Log("CARREGOU AUDIO");
-                    OnCarregouAudio(clip);
+                    OnCarregouAudio?.Invoke(this, clip);
                 }
                 else
                 {
                     Debug.LogWarning("NAO CARREGOU AUDIO");
-                    OnCarregouAudio(null);
+                    OnCarregouAudio?.Invoke(this, null);
                 }
             }
         };      
     }
 
-    private void OnCarregouAudio(AudioClip audio)
-    {
-        foreach(ICarregarEvent carregarEvent in carregarEvents) 
-        {
-            carregarEvent.OnCarregouAudio(audio);
-        }
-    }
+    public EventHandler<AudioClip> OnCarregouAudio;
 
     /// <summary>
     /// Obter o formato atraves do nome completo do ficheiro.

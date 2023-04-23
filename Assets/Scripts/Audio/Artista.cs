@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 
 public class Artista : MonoBehaviour
 {
@@ -94,5 +93,9 @@ public class Artista : MonoBehaviour
                 obj.transform.localEulerAngles = config.rotacaoLocal;
             }
         }
+
+        OnCarregouInstrumento?.Invoke(this, inst);
     }
+
+    public EventHandler<Instrumento> OnCarregouInstrumento;
 }

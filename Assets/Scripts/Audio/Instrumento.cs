@@ -16,6 +16,8 @@ public class Instrumento : MonoBehaviour
     [SerializeField]
     private bool ativado;
 
+    public string nomeInstrumento;
+
     private TocadorAudio tocador;
 
     public MovimentoSom movimento;
@@ -36,6 +38,11 @@ public class Instrumento : MonoBehaviour
             movimento.SetAudioSource(tocador.audioSource);
             tocador.Tocar();
         }
+    }
+
+    public bool ProntoATocar()
+    {
+        return tocador.ProntoATocar();
     }
 
     public void Ativar()

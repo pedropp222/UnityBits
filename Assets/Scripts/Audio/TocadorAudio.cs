@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class TocadorAudio : MonoBehaviour, ICarregarEvent
+public class TocadorAudio : MonoBehaviour
 {
     [SerializeField]
     private string caminhoAtual;
@@ -21,7 +21,7 @@ public class TocadorAudio : MonoBehaviour, ICarregarEvent
     private void Start()
     {
         carregador = new CarregadorAudio();
-        carregador.carregarEvents.Add(this);
+        carregador.OnCarregouAudio += (sender,clip) => OnCarregouAudio(clip);
     }
 
     public void AdicionarMusica(string caminho)
