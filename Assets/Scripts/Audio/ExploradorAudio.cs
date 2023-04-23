@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ExploradorSistema : MonoBehaviour
+public class ExploradorAudio : MonoBehaviour
 {
     private string lastPath;
 
@@ -67,28 +67,40 @@ public class ExploradorSistema : MonoBehaviour
         while(conteudoExplorador.transform.childCount > 0)
         {
             DestroyImmediate(conteudoExplorador.transform.GetChild(0).gameObject);
-        }
-
-        string[] pastas = Directory.GetDirectories(lastPath);
-        string[] ficheiros = Directory.GetFiles(lastPath);
+        }    
 
         caminhoTexto.text = lastPath;
 
-        if (lastPath.Length > 3)
+        if (lastPath != "PC")
         {
             CriarBotao(true, lastPath,true);
         }
 
-        for(int i = 0; i < pastas.Length; i++)
+        if (lastPath == "PC")
         {
-            CriarBotao(true, pastas[i]);
-        }
+            DriveInfo[] discos = DriveInfo.GetDrives();
 
-        for (int i = 0; i < ficheiros.Length; i++)
-        {
-            if (ficheiros[i].EndsWith(".mp3") || ficheiros[i].EndsWith(".wav") || ficheiros[i].EndsWith(".ogg"))
+            foreach(var disco in discos)
             {
-                CriarBotao(false, ficheiros[i]);
+                CriarBotao(true, disco.VolumeLabel);
+            }
+        }
+        else
+        {
+            string[] pastas = Directory.GetDirectories(lastPath);
+            string[] ficheiros = Directory.GetFiles(lastPath);
+
+            for (int i = 0; i < pastas.Length; i++)
+            {
+                CriarBotao(true, pastas[i]);
+            }
+
+            for (int i = 0; i < ficheiros.Length; i++)
+            {
+                if (ficheiros[i].EndsWith(".mp3") || ficheiros[i].EndsWith(".wav") || ficheiros[i].EndsWith(".ogg"))
+                {
+                    CriarBotao(false, ficheiros[i]);
+                }
             }
         }
     }
@@ -109,7 +121,14 @@ public class ExploradorSistema : MonoBehaviour
             {
                 if (tras)
                 {
-                    ApresentarListaElementos(caminho.Substring(0,caminho.LastIndexOf('\\')));
+                    if (caminho.LastIndexOf('\\') == -1)
+                    {
+                        ApresentarListaElementos("PC");
+                    }
+                    else
+                    {
+                        ApresentarListaElementos(caminho.Substring(0, caminho.LastIndexOf('\\')));
+                    }
                 }
                 else
                 {

@@ -87,13 +87,14 @@
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\TargetFieldOfView.cs" />
     <Compile Include="Assets\Scripts\Controladores\SonsPassosDados.cs" />
     <Compile Include="Assets\Assets Unity\Utility\SimpleMouseRotator.cs" />
-    <Compile Include="Assets\Scripts\Audio\ExploradorSistema.cs" />
+    <Compile Include="Assets\Scripts\Audio\ExploradorAudio.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\AbstractTargetFollower.cs" />
     <Compile Include="Assets\Assets Unity\Utility\SmoothFollow.cs" />
     <Compile Include="Assets\Scripts\Controladores\SonsPassosControlador.cs" />
     <Compile Include="Assets\Scripts\Eventos\OnClick_AbrirExploradorMusica.cs" />
     <Compile Include="Assets\Scripts\Jogador.cs" />
     <Compile Include="Assets\Scripts\Rodar.cs" />
+    <Compile Include="Assets\Scripts\Audio\Utils\PoseEscritor.cs" />
     <Compile Include="Assets\Scripts\Audio\CarregadorAudio.cs" />
     <Compile Include="Assets\Scripts\Eventos\Pausa\OnPause_ToggleObjects.cs" />
     <Compile Include="Assets\Assets Unity\Utility\FOVKick.cs" />
@@ -103,7 +104,6 @@
     <Compile Include="Assets\Assets Unity\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\LookatTarget.cs" />
     <Compile Include="Assets\Scripts\Outros\SineScaler.cs" />
-    <Compile Include="Assets\Scripts\Audio\Utils\PoseEscritor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets Unity\Cameras\CameraGuidelines.txt" />

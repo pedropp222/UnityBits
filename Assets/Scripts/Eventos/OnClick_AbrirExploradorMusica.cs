@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnClick_AbrirExploradorMusica : MonoBehaviour, IInteragivel
 {
-    public ExploradorSistema explorador;
+    public ExploradorAudio explorador;
     public TocadorAudio tocadorAudio;
 
     public void OnInteragir(RatoBotao botao)
