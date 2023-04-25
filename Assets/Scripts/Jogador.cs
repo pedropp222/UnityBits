@@ -25,6 +25,24 @@ public class Jogador : MonoBehaviour, IPausable
         fps.SetRotate(estado);
     }
 
+    void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            if (!Cursor.visible)
+            {
+                SetMover(false);
+            }
+        }
+        else if (!Input.GetKey(KeyCode.Tab))
+        {
+            if (Cursor.visible)
+            {
+                SetMover(true);
+            }
+        }
+    }
+
     //Chamado automaticamente pelo PausaControlador
     public void OnPause(bool state)
     {
