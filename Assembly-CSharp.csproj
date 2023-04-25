@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Audio\Instrumento.cs" />
+    <Compile Include="Assets\Scripts\Controladores\ProjetoControlador.cs" />
+    <Compile Include="Assets\Scripts\Eventos\OnTrigger_AbrirPalcoGUIPanel.cs" />
     <Compile Include="Assets\Assets Unity\Utility\DynamicShadowSettings.cs" />
     <Compile Include="Assets\Scripts\Controladores\PausaControlador.cs" />
     <Compile Include="Assets\Assets Unity\Utility\LerpControlledBob.cs" />
@@ -104,6 +106,9 @@
     <Compile Include="Assets\Assets Unity\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\LookatTarget.cs" />
     <Compile Include="Assets\Scripts\Outros\SineScaler.cs" />
+    <Compile Include="Assets\Scripts\Controladores\GUIControlador.cs" />
+    <Compile Include="Assets\Scripts\Controladores\GUI\GUIJanelaTexto.cs" />
+    <Compile Include="Assets\Scripts\Controladores\GUI\GUIPalcoPainel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets Unity\Cameras\CameraGuidelines.txt" />
