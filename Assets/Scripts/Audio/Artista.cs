@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Artista : MonoBehaviour
+public class Artista : MonoBehaviour, IGravavelMusica
 {
     public string nomeArtista;
 
@@ -16,6 +16,10 @@ public class Artista : MonoBehaviour
     private void Start()
     {
         objinstrumentos = new List<Instrumento>();
+        if (instrumentosConfiguracoes == null)
+        {
+            instrumentosConfiguracoes = new List<InstrumentoConfiguracao>();
+        }
 
         foreach(var instrumento in instrumentosConfiguracoes)
         {
@@ -76,6 +80,7 @@ public class Artista : MonoBehaviour
                 if (parte == null)
                 {
                     Debug.LogError("ERRO: NAO ENCONTROU A PARTE DO CORPO " + parte + " PARA INSTANCIAR O OBJETO");
+                    continue;
                 }
             }
 
@@ -95,6 +100,12 @@ public class Artista : MonoBehaviour
         }
 
         OnCarregouInstrumento?.Invoke(this, inst);
+    }
+
+    public void OnGravar(string caminho)
+    {
+        //TODO: implementar isto claro, usar uma cena para gravar / carregar facilmente como JSON ou assim
+        Debug.Log("Implementar save");
     }
 
     public EventHandler<Instrumento> OnCarregouInstrumento;

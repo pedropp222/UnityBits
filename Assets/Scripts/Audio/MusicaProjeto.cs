@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+///Este é a classe "principal" do grande sistema de projetos de musica. Nesta classe ficam localizados todos os artistas que pertencem
+///a este projeto e os seus instrumentos. Contem tambem vários métodos utilitários para fazer uma diversidade de ações que dizem
+///respeito a gestao / criaçao de projetos
 public class MusicaProjeto : MonoBehaviour
 {
     public string projetoNome;
@@ -46,5 +49,13 @@ public class MusicaProjeto : MonoBehaviour
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Gravar projeto no disco, na localizacao que ja foi criada
+    /// </summary>
+    public void GravarProjeto()
+    {
+        
     }
 }

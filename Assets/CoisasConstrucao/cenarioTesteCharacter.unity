@@ -4838,6 +4838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TocadorMusicaPrefab: {fileID: 0}
+  artistaPrefab: {fileID: 7074988459660523052, guid: d5c59cb543854c94b9045a79821e3a25, type: 3}
 --- !u!114 &1575558230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4852,7 +4853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   janelaModalTexto: {fileID: 915294804}
   palcoPainel: {fileID: 195979352}
-  botaoGenerico: {fileID: 0}
+  botaoGenerico: {fileID: 7784236416035709667, guid: faf46781451b37c4e86f11be72107a58, type: 3}
 --- !u!114 &1575558231
 MonoBehaviour:
   m_ObjectHideFlags: 0

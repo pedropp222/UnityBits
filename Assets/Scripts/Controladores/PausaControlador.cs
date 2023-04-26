@@ -21,6 +21,7 @@ public class PausaControlador : MonoBehaviour
     public void TogglePause()
     {
         //Encontrar todos os componentes do tipo IPausable e chamalos.
+        //TODO: depois encontrar uma cena melhor em vez de tar sempre a encontrar todos os objetos pausable
         paused = !paused;
         foreach(IPausable pausable in ComponentFinder.Find<IPausable>())
         {

@@ -20,6 +20,11 @@ public class UtilsController : MonoBehaviour
     /// </summary>
     public GameObject TocadorMusicaPrefab;
 
+    /// <summary>
+    /// Prefab de um artista vazio pronto a ser instanciado para um projeto
+    /// </summary>
+    public GameObject artistaPrefab;
+
     private void Awake()
     {
         if (instancia == null)

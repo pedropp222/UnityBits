@@ -59,9 +59,9 @@
     <Compile Include="Assets\Scripts\Audio\Instrumento.cs" />
     <Compile Include="Assets\Scripts\Controladores\ProjetoControlador.cs" />
     <Compile Include="Assets\Scripts\Eventos\OnTrigger_AbrirPalcoGUIPanel.cs" />
-    <Compile Include="Assets\Assets Unity\Utility\DynamicShadowSettings.cs" />
     <Compile Include="Assets\Scripts\Controladores\PausaControlador.cs" />
     <Compile Include="Assets\Assets Unity\Utility\LerpControlledBob.cs" />
+    <Compile Include="Assets\Scripts\Controladores\GUI\GUIPalcoPainel.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IHoverable.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\HandHeldCam.cs" />
@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Controladores\SonsPassosControlador.cs" />
     <Compile Include="Assets\Scripts\Eventos\OnClick_AbrirExploradorMusica.cs" />
     <Compile Include="Assets\Scripts\Jogador.cs" />
+    <Compile Include="Assets\Scripts\Controladores\GUI\GUIJanelaTexto.cs" />
     <Compile Include="Assets\Scripts\Rodar.cs" />
     <Compile Include="Assets\Scripts\Audio\Utils\PoseEscritor.cs" />
     <Compile Include="Assets\Scripts\Audio\CarregadorAudio.cs" />
@@ -107,8 +108,8 @@
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\LookatTarget.cs" />
     <Compile Include="Assets\Scripts\Outros\SineScaler.cs" />
     <Compile Include="Assets\Scripts\Controladores\GUIControlador.cs" />
-    <Compile Include="Assets\Scripts\Controladores\GUI\GUIJanelaTexto.cs" />
-    <Compile Include="Assets\Scripts\Controladores\GUI\GUIPalcoPainel.cs" />
+    <Compile Include="Assets\Scripts\Eventos\OnClick_AdicionarArtista.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IGravavelMusica.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets Unity\Cameras\CameraGuidelines.txt" />

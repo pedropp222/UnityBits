@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// O componente onde guarda varias informações sobre um instrumento, tal como a parte do corpo que afeta
-/// o movimento do som ou mais coisas como transformações dos ossos do artista, ou instanciacao de novos objetos
+/// O componente onde guarda varias informaÃ§Ãµes sobre um instrumento, tal como a parte do corpo que afeta
+/// o movimento do som ou mais coisas como transformaÃ§Ãµes dos ossos do artista, ou instanciacao de novos objetos
 /// </summary>
 [CreateAssetMenu(fileName = "Dados", menuName = "ScriptableObjects/Instrumento Configuracao", order = 1)]
 public class InstrumentoConfiguracao : ScriptableObject
@@ -45,7 +45,7 @@ public class InstanciarConfiguracao
 
 /// <summary>
 /// Classe onde de pode definir uma transformacao a acontecer ao osso de um artista.
-/// O nomeParte é o nome da parte do corpo que vai ser afetada. rotacaoLocal é a rotaçao que vai ser aplicada a esta
+/// O nomeParte Ã© o nome da parte do corpo que vai ser afetada. rotacaoLocal Ã© a rotaÃ§ao que vai ser aplicada a esta
 /// parte do corpo.
 /// </summary>
 [System.Serializable]

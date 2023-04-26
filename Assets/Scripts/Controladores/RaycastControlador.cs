@@ -16,28 +16,46 @@ public class RaycastControlador : MonoBehaviour
 
     private GameObject focusObject = null;
 
+    private static GameObject colocarObjeto = null;
+    private static Vector3 hitPos;
+
+    public static RaycastControlador instancia;
+
+    private void Awake()
+    {
+        instancia = this;
+    }
+
+    //TODO: Limpar isto, melhorar o sistema de 'colocarObjeto' para dar para rodar um objeto.
+    //Isto do colocar objeto tem que sair daqui para fora do RaycastControlador e ir para outro sitio
+
     private void FixedUpdate()
     {
         if (Cursor.lockState != CursorLockMode.Locked) return;
 
         if (Physics.Raycast(camara.transform.position, camara.transform.forward, out hit, distanciaMaxima))
         {
+            if (colocarObjeto != null)
+            {
+                hitPos = hit.point;
+            }
+
             if (focusObject != hit.collider.gameObject)
             {
                 if (focusObject != null)
                 {
-                    CallHoverEnd();
+                    ChamarHoverEnd();
                 }
 
                 focusObject = hit.collider.gameObject;
-                CallHoverStart();
+                ChamarHoverStart();
             }
         }
         else
         {
             if (focusObject != null)
             {
-                CallHoverEnd();
+                ChamarHoverEnd();
                 focusObject = null;
             }
         }
@@ -58,9 +76,32 @@ public class RaycastControlador : MonoBehaviour
                 interagivel.OnInteragir(button0?RatoBotao.ESQUERDO:RatoBotao.DIREITO);
             }
         }
+        if (colocarObjeto != null)
+        {
+            colocarObjeto.transform.position = Vector3.Lerp(colocarObjeto.transform.position,hitPos,6f*Time.deltaTime);
+            if (button0)
+            {
+                LimparColocarObjeto();
+            }
+            else if (button1)
+            {
+                Destroy(colocarObjeto);
+                LimparColocarObjeto();
+            }
+        }
     }
 
-    private void CallHoverStart()
+    public void SetColocarObjeto(GameObject go)
+    {
+        colocarObjeto = go;
+    }
+
+    public void LimparColocarObjeto()
+    {
+        colocarObjeto = null;
+    }
+
+    private void ChamarHoverStart()
     {
         foreach (IHoverable hoverable in focusObject.GetComponents<IHoverable>())
         {
@@ -68,7 +109,7 @@ public class RaycastControlador : MonoBehaviour
         }
     }
 
-    private void CallHoverEnd()
+    private void ChamarHoverEnd()
     {
         foreach (IHoverable hoverable in focusObject.GetComponents<IHoverable>())
         {

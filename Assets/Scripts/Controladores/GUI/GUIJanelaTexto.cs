@@ -19,7 +19,9 @@ namespace Assets.Scripts.Controladores.GUI
         private static InputField inputTexto;
         private static Button confirmarBotao;
 
-        public static void AbrirJanelaTexto(string descricao, EventHandler<string> confirmarAcao)
+        //TODO: Estas e outras janelas modais tem que tomar conta do teclado e rato. Por isso tem que bloquear o player enquanto
+        //estes tipos de janelas tiverem abertas
+        public static void AbrirJanela(string descricao, EventHandler<string> confirmarAcao)
         {
             if (aberto)
             {
@@ -41,6 +43,7 @@ namespace Assets.Scripts.Controladores.GUI
             }
 
             janelaModalTexto.SetActive(true);
+            aberto = true;
             descricaoTexto.text = descricao;
             inputTexto.text = "";
             

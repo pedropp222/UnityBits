@@ -1,6 +1,10 @@
 ﻿using System.Collections;
+using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Classe controlador de projetos, identifica e gere o projeto atual
+/// </summary>
 public class ProjetoControlador : MonoBehaviour
 {
     public static ProjetoControlador instancia;
@@ -10,6 +14,15 @@ public class ProjetoControlador : MonoBehaviour
     private void Awake()
     {
         instancia = this;
+        if (!Directory.Exists("projetos"))
+        {
+            Directory.CreateDirectory("projetos");
+        }
+    }
+
+    public string GetProjetoNome()
+    {
+        return projetoAtual != null ? projetoAtual.projetoNome : null;
     }
 
     public bool ExisteProjeto()
@@ -19,11 +32,19 @@ public class ProjetoControlador : MonoBehaviour
 
     public void CriarProjeto(string nome)
     {
-        if (projetoAtual == null)
+        if (projetoAtual != null)
         {
             Debug.LogWarning("Ja esta um projeto carregado");
             return;
         }
+
+        if (Directory.Exists("projetos/"+nome))
+        {
+            Debug.LogWarning("Nao deu para criar um projeto com nome "+nome+" porque ja existe");
+            return;
+        }
+
+        Directory.CreateDirectory("projetos/" + nome);
 
         projetoAtual = gameObject.AddComponent<MusicaProjeto>();
         projetoAtual.projetoNome = nome;
