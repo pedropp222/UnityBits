@@ -1,6 +1,7 @@
-using UnityEngine;
-
-interface IPausable
+namespace Interfaces
 {
-    void OnPause(bool state);
+    interface IPausable
+    {
+        void OnPause(bool state);
+    }
 }

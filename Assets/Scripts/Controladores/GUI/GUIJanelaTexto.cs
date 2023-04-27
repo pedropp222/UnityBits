@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Controladores.GUI
+namespace Controladores.GUI
 {
     public class GUIJanelaTexto
     {

@@ -11,48 +11,50 @@ using UnityEngine;
 /// Contém também uma classe MovimentoSom, que escuta o TocadorAudio e que faz o artista mecher uma
 /// parte do corpo ao mesmo tempo que o audio deste TocadorAudio muda.
 /// </summary>
-public class Instrumento : MonoBehaviour
+namespace Audio
 {
-    [SerializeField]
-    private bool ativado;
-
-    public string nomeInstrumento;
-
-    private TocadorAudio tocador;
-
-    public MovimentoSom movimento;
-
-    private void Start()
+    public class Instrumento : MonoBehaviour
     {
-        tocador = gameObject.AddComponent<TocadorAudio>();
-    }
+        [SerializeField]
+        private bool ativado;
 
-    /// <summary>
-    /// Começar a tocar o som deste instrumento, e dar ao MovimentoSom o AudioSource que precisa para fazer o seu movimento
-    /// So vai comecar a tocar se este instrumento estiver ativado (vai dar para ativar / desativar sons quando quiseres)
-    /// </summary>
-    public void Tocar()
-    {
-        if (tocador.ProntoATocar() && ativado)
+        public string nomeInstrumento;
+
+        private TocadorAudio tocador;
+
+        public MovimentoSom movimento;
+
+        private void Start()
         {
-            movimento.SetAudioSource(tocador.audioSource);
-            tocador.Tocar();
+            tocador = gameObject.AddComponent<TocadorAudio>();
+        }
+
+        /// <summary>
+        /// Começar a tocar o som deste instrumento, e dar ao MovimentoSom o AudioSource que precisa para fazer o seu movimento
+        /// So vai comecar a tocar se este instrumento estiver ativado (vai dar para ativar / desativar sons quando quiseres)
+        /// </summary>
+        public void Tocar()
+        {
+            if (tocador.ProntoATocar() && ativado)
+            {
+                movimento.SetAudioSource(tocador.audioSource);
+                tocador.Tocar();
+            }
+        }
+
+        public bool ProntoATocar()
+        {
+            return tocador.ProntoATocar();
+        }
+
+        public void Ativar()
+        {
+            ativado = true;
+        }
+
+        public void Desativar()
+        {
+            ativado = false;
         }
     }
-
-    public bool ProntoATocar()
-    {
-        return tocador.ProntoATocar();
-    }
-
-    public void Ativar()
-    {
-        ativado = true;
-    }
-
-    public void Desativar()
-    {
-        ativado = false;
-    }
 }
-

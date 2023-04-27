@@ -6,92 +6,96 @@ using UnityEngine.Networking;
 
 /// <summary>
 /// Esta classe encarrega-se de carregar ficheiros de audio do disco. A partir de um caminho que fornecemos a esta classe,
-/// ela vai validar se se trata de um ficheiro válido e carrega então o ficheiro. Caso tudo corra bem, ela chama os eventos
-/// (ICarregarEvent) que estão a escutar este carregador, e este fornece o AudioClip, ou nulo.
+/// ela vai validar se se trata de um ficheiro vï¿½lido e carrega entï¿½o o ficheiro. Caso tudo corra bem, ela chama os eventos
+/// (ICarregarEvent) que estï¿½o a escutar este carregador, e este fornece o AudioClip, ou nulo.
 /// </summary>
-public class CarregadorAudio
+
+namespace Audio
 {
-    //O caminho completo do ficheiro a carregar! exemplo: C:/USERS/PEDRO/DESKTOP/PASTA/MUSICA.MP3
-    private string caminho = "";
-
-    public void CarregarMusica(string caminho)
+    public class CarregadorAudio
     {
-        this.caminho = caminho;
-        Carregar();
-    }
+        //O caminho completo do ficheiro a carregar! exemplo: C:/USERS/PEDRO/DESKTOP/PASTA/MUSICA.MP3
+        private string caminho = "";
 
-    private void Carregar()
-    {
-        if (!System.IO.File.Exists(caminho))
+        public void CarregarMusica(string caminho)
         {
-            Debug.LogError("ERRO: A LOCALIZACAO: '" + caminho + "' NAO EXISTE");
-            OnCarregouAudio?.Invoke(this, null);
-            return;
+            this.caminho = caminho;
+            Carregar();
         }
 
-        var tipo = TypeFromExtension();
-
-        Debug.Log("A carregar: "+tipo);
-
-        if (tipo == AudioType.UNKNOWN)
+        private void Carregar()
         {
-            Debug.LogError("ERRO. O TIPO DE FICHEIRO E DESCONHECIDO. TEM QUE SER UM FICHEIRO DE AUDIO (MP3, WAV, OGG)");
-            OnCarregouAudio?.Invoke(this, null);
-            return;
-        }
-
-        var req = UnityWebRequestMultimedia.GetAudioClip("file://" + caminho,tipo);
-
-        ((DownloadHandlerAudioClip)req.downloadHandler).streamAudio = true;
-
-        req.SendWebRequest().completed += (x) =>
-        {
-            DownloadHandlerAudioClip carregador = (DownloadHandlerAudioClip)req.downloadHandler;
-
-            if (carregador.isDone)
+            if (!System.IO.File.Exists(caminho))
             {
-                AudioClip clip = carregador.audioClip;
+                Debug.LogError("ERRO: A LOCALIZACAO: '" + caminho + "' NAO EXISTE");
+                OnCarregouAudio?.Invoke(this, null);
+                return;
+            }
 
-                if (clip != null)
+            var tipo = TypeFromExtension();
+
+            Debug.Log("A carregar: " + tipo);
+
+            if (tipo == AudioType.UNKNOWN)
+            {
+                Debug.LogError("ERRO. O TIPO DE FICHEIRO E DESCONHECIDO. TEM QUE SER UM FICHEIRO DE AUDIO (MP3, WAV, OGG)");
+                OnCarregouAudio?.Invoke(this, null);
+                return;
+            }
+
+            var req = UnityWebRequestMultimedia.GetAudioClip("file://" + caminho, tipo);
+
+            ((DownloadHandlerAudioClip)req.downloadHandler).streamAudio = true;
+
+            req.SendWebRequest().completed += (x) =>
+            {
+                DownloadHandlerAudioClip carregador = (DownloadHandlerAudioClip)req.downloadHandler;
+
+                if (carregador.isDone)
                 {
-                    Debug.Log("CARREGOU AUDIO");
-                    OnCarregouAudio?.Invoke(this, clip);
+                    AudioClip clip = carregador.audioClip;
+
+                    if (clip != null)
+                    {
+                        Debug.Log("CARREGOU AUDIO");
+                        OnCarregouAudio?.Invoke(this, clip);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("NAO CARREGOU AUDIO");
+                        OnCarregouAudio?.Invoke(this, null);
+                    }
                 }
-                else
+            };
+        }
+
+        public EventHandler<AudioClip> OnCarregouAudio;
+
+        /// <summary>
+        /// Obter o formato atraves do nome completo do ficheiro.
+        /// Apenas suporta mp3, wav e ogg, e ja chega muito bem.
+        /// </summary>
+        /// <returns>O tipo de audio que encontrou, ou entao "unknown"</returns>
+        private AudioType TypeFromExtension()
+        {
+            if (caminho.IndexOf('.') != -1)
+            {
+                string ext = caminho.Split('.')[^1];
+
+                switch (ext)
                 {
-                    Debug.LogWarning("NAO CARREGOU AUDIO");
-                    OnCarregouAudio?.Invoke(this, null);
+                    case "mp3":
+                        return AudioType.MPEG;
+                    case "ogg":
+                        return AudioType.OGGVORBIS;
+                    case "wav":
+                        return AudioType.WAV;
+                    default:
+                        return AudioType.UNKNOWN;
                 }
             }
-        };      
-    }
 
-    public EventHandler<AudioClip> OnCarregouAudio;
-
-    /// <summary>
-    /// Obter o formato atraves do nome completo do ficheiro.
-    /// Apenas suporta mp3, wav e ogg, e ja chega muito bem.
-    /// </summary>
-    /// <returns>O tipo de audio que encontrou, ou entao "unknown"</returns>
-    private AudioType TypeFromExtension()
-    {
-        if (caminho.IndexOf('.')!=-1)
-        {
-            string ext = caminho.Split('.')[^1];
-
-            switch(ext)
-            {
-                case "mp3":
-                    return AudioType.MPEG;
-                case "ogg":
-                    return AudioType.OGGVORBIS;
-                case "wav":
-                    return AudioType.WAV;
-                default:
-                    return AudioType.UNKNOWN;
-            }
+            return AudioType.UNKNOWN;
         }
-        
-        return AudioType.UNKNOWN;
     }
 }

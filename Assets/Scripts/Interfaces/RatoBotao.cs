@@ -1,5 +1,8 @@
-﻿public enum RatoBotao
+﻿namespace Interfaces
 {
-    ESQUERDO,
-    DIREITO
+    public enum RatoBotao
+    {
+        ESQUERDO,
+        DIREITO
+    }
 }

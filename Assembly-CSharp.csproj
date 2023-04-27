@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{20FA7901-6CF8-808E-47A1-F1E175CDA844}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -62,16 +63,17 @@
     <Compile Include="Assets\Scripts\Controladores\PausaControlador.cs" />
     <Compile Include="Assets\Assets Unity\Utility\LerpControlledBob.cs" />
     <Compile Include="Assets\Scripts\Controladores\GUI\GUIPalcoPainel.cs" />
+    <Compile Include="Assets\Scripts\Outros\Rodar.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IHoverable.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\HandHeldCam.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\FreeLookCam.cs" />
     <Compile Include="Assets\Scripts\Audio\TocadorAudio.cs" />
     <Compile Include="Assets\Assets Unity\Utility\CameraRefocus.cs" />
-    <Compile Include="Assets\Scripts\Controladores\ComponentFinder.cs" />
     <Compile Include="Assets\Scripts\Eventos\Pausa\OnPause_ToggleComponent.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\AutoCam.cs" />
     <Compile Include="Assets\Scripts\Eventos\Pausa\OnClick_TriggerPause.cs" />
+    <Compile Include="Assets\Scripts\Controladores\Config\SonsPassosDados.cs" />
     <Compile Include="Assets\Assets Unity\Utility\CurveControlledBob.cs" />
     <Compile Include="Assets\Scripts\Interfaces\RatoBotao.cs" />
     <Compile Include="Assets\Assets Unity\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
@@ -80,23 +82,24 @@
     <Compile Include="Assets\Scripts\Audio\MusicaProjeto.cs" />
     <Compile Include="Assets\Assets Unity\Utility\AutoMoveAndRotate.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IPausable.cs" />
-    <Compile Include="Assets\Scripts\Debug\RaycastDebug.cs" />
+    <Compile Include="Assets\Scripts\Debugs\RaycastDebug.cs" />
     <Compile Include="Assets\Scripts\Controladores\RaycastControlador.cs" />
-    <Compile Include="Assets\Scripts\Audio\InstrumentoConfiguracao.cs" />
     <Compile Include="Assets\Scripts\Audio\Artista.cs" />
     <Compile Include="Assets\Assets Unity\Utility\FPSCounter.cs" />
+    <Compile Include="Assets\Scripts\Audio\Config\InstrumentoConfiguracao.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IGravavelMusica.cs" />
     <Compile Include="Assets\Assets Unity\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\TargetFieldOfView.cs" />
-    <Compile Include="Assets\Scripts\Controladores\SonsPassosDados.cs" />
     <Compile Include="Assets\Assets Unity\Utility\SimpleMouseRotator.cs" />
     <Compile Include="Assets\Scripts\Audio\ExploradorAudio.cs" />
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\AbstractTargetFollower.cs" />
     <Compile Include="Assets\Assets Unity\Utility\SmoothFollow.cs" />
     <Compile Include="Assets\Scripts\Controladores\SonsPassosControlador.cs" />
     <Compile Include="Assets\Scripts\Eventos\OnClick_AbrirExploradorMusica.cs" />
+    <Compile Include="Assets\Scripts\Controladores\ColocarObjetoControlador.cs" />
+    <Compile Include="Assets\Scripts\Eventos\OnClick_AdicionarArtista.cs" />
     <Compile Include="Assets\Scripts\Jogador.cs" />
     <Compile Include="Assets\Scripts\Controladores\GUI\GUIJanelaTexto.cs" />
-    <Compile Include="Assets\Scripts\Rodar.cs" />
     <Compile Include="Assets\Scripts\Audio\Utils\PoseEscritor.cs" />
     <Compile Include="Assets\Scripts\Audio\CarregadorAudio.cs" />
     <Compile Include="Assets\Scripts\Eventos\Pausa\OnPause_ToggleObjects.cs" />
@@ -108,8 +111,7 @@
     <Compile Include="Assets\Assets Unity\Cameras\Scripts\LookatTarget.cs" />
     <Compile Include="Assets\Scripts\Outros\SineScaler.cs" />
     <Compile Include="Assets\Scripts\Controladores\GUIControlador.cs" />
-    <Compile Include="Assets\Scripts\Eventos\OnClick_AdicionarArtista.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IGravavelMusica.cs" />
+    <Compile Include="Assets\Scripts\Outros\ComponentFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets Unity\Cameras\CameraGuidelines.txt" />

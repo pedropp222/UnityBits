@@ -1,4 +1,7 @@
-public interface IGravavelMusica
+namespace Interfaces
 {
-    public void OnGravar(string caminho);
+    public interface IGravavelMusica
+    {
+        public void OnGravar(string caminho);
+    }
 }

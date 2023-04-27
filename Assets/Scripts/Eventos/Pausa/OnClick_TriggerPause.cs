@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Controladores;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,23 +8,26 @@ using UnityEngine.UI;
 /// Classe que permite chamar o controlador de pausa e alterar o estado do jogo, sem clicar no botao de pausa.
 /// E obrigatorio colocar este componente num botao.
 /// </summary>
-[RequireComponent(typeof (Button))]
-public class OnClick_TriggerPause : MonoBehaviour
+namespace Eventos.Pausa
 {
-    private PausaControlador controlador;
-
-    private void Start()
+    [RequireComponent(typeof(Button))]
+    public class OnClick_TriggerPause : MonoBehaviour
     {
-        //Tentar encontrar o PausaControlador (tem que existir no nosso scene)
-        controlador = FindObjectOfType<PausaControlador>();
+        private PausaControlador controlador;
 
-        if (controlador == null)
+        private void Start()
         {
-            Debug.LogWarning("Controlador de pausa nao existe");
-            return;
-        }
+            //Tentar encontrar o PausaControlador (tem que existir no nosso scene)
+            controlador = FindObjectOfType<PausaControlador>();
 
-        //Quando clicar neste botao, fazer toggle da pausa.
-        GetComponent<Button>().onClick.AddListener(() => controlador.TogglePause());
+            if (controlador == null)
+            {
+                Debug.LogWarning("Controlador de pausa nao existe");
+                return;
+            }
+
+            //Quando clicar neste botao, fazer toggle da pausa.
+            GetComponent<Button>().onClick.AddListener(() => controlador.TogglePause());
+        }
     }
 }

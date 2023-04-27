@@ -1,120 +1,93 @@
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 
 /// <summary>
 /// Classe que permite a interacao do jogador com os objetos do mundo, usando a camara/rato como apontador
 /// </summary>
-public class RaycastControlador : MonoBehaviour
+namespace Controladores
 {
-    [Tooltip("Distancia maxima que se pode interagir com objetos")]
-    public float distanciaMaxima;
-
-    public Camera camara;
-
-    private RaycastHit hit;
-
-    private GameObject focusObject = null;
-
-    private static GameObject colocarObjeto = null;
-    private static Vector3 hitPos;
-
-    public static RaycastControlador instancia;
-
-    private void Awake()
+    public class RaycastControlador : MonoBehaviour
     {
-        instancia = this;
-    }
+        [Tooltip("Distancia maxima que se pode interagir com objetos")]
+        public float distanciaMaxima;
 
-    //TODO: Limpar isto, melhorar o sistema de 'colocarObjeto' para dar para rodar um objeto.
-    //Isto do colocar objeto tem que sair daqui para fora do RaycastControlador e ir para outro sitio
+        public Camera camara;
 
-    private void FixedUpdate()
-    {
-        if (Cursor.lockState != CursorLockMode.Locked) return;
+        private RaycastHit hit;
 
-        if (Physics.Raycast(camara.transform.position, camara.transform.forward, out hit, distanciaMaxima))
+        private GameObject focusObject = null;
+
+        public static RaycastControlador instancia;
+
+        private void Awake()
         {
-            if (colocarObjeto != null)
-            {
-                hitPos = hit.point;
-            }
+            instancia = this;
+        }
 
-            if (focusObject != hit.collider.gameObject)
+        //TODO: Limpar isto, melhorar o sistema de 'colocarObjeto' para dar para rodar um objeto.
+        //Isto do colocar objeto tem que sair daqui para fora do RaycastControlador e ir para outro sitio
+
+        private void FixedUpdate()
+        {
+            if (Cursor.lockState != CursorLockMode.Locked) return;
+
+            if (Physics.Raycast(camara.transform.position, camara.transform.forward, out hit, distanciaMaxima))
+            {
+                if (focusObject != hit.collider.gameObject)
+                {
+                    if (focusObject != null)
+                    {
+                        ChamarHoverEnd();
+                    }
+
+                    focusObject = hit.collider.gameObject;
+                    ChamarHoverStart();
+                }
+            }
+            else
             {
                 if (focusObject != null)
                 {
                     ChamarHoverEnd();
+                    focusObject = null;
                 }
-
-                focusObject = hit.collider.gameObject;
-                ChamarHoverStart();
             }
         }
-        else
+
+        void Update()
         {
-            if (focusObject != null)
+            if (Cursor.lockState != CursorLockMode.Locked) return;
+
+            bool button0 = Input.GetMouseButtonDown(0);
+            bool button1 = Input.GetMouseButtonDown(1);
+
+            if ((button0 || button1) && focusObject != null)
             {
-                ChamarHoverEnd();
-                focusObject = null;
+                foreach (IInteragivel interagivel in focusObject.GetComponents<IInteragivel>())
+                {
+                    interagivel.OnInteragir(button0 ? RatoBotao.ESQUERDO : RatoBotao.DIREITO);
+                }
             }
+            
         }
-    }
 
-    void Update()
-    {
-        if (Cursor.lockState != CursorLockMode.Locked) return;
-
-
-        bool button0 = Input.GetMouseButtonDown(0);
-        bool button1 = Input.GetMouseButtonDown(1);
-
-        if ((button0 || button1) && focusObject != null)
+        private void ChamarHoverStart()
         {
-            foreach (IInteragivel interagivel in focusObject.GetComponents<IInteragivel>())
+            foreach (IHoverable hoverable in focusObject.GetComponents<IHoverable>())
             {
-                interagivel.OnInteragir(button0?RatoBotao.ESQUERDO:RatoBotao.DIREITO);
+                hoverable.OnHoverStart();
             }
         }
-        if (colocarObjeto != null)
+
+        private void ChamarHoverEnd()
         {
-            colocarObjeto.transform.position = Vector3.Lerp(colocarObjeto.transform.position,hitPos,6f*Time.deltaTime);
-            if (button0)
+            foreach (IHoverable hoverable in focusObject.GetComponents<IHoverable>())
             {
-                LimparColocarObjeto();
-            }
-            else if (button1)
-            {
-                Destroy(colocarObjeto);
-                LimparColocarObjeto();
+                hoverable.OnHoverEnd();
             }
         }
-    }
 
-    public void SetColocarObjeto(GameObject go)
-    {
-        colocarObjeto = go;
     }
-
-    public void LimparColocarObjeto()
-    {
-        colocarObjeto = null;
-    }
-
-    private void ChamarHoverStart()
-    {
-        foreach (IHoverable hoverable in focusObject.GetComponents<IHoverable>())
-        {
-            hoverable.OnHoverStart();
-        }
-    }
-
-    private void ChamarHoverEnd()
-    {
-        foreach (IHoverable hoverable in focusObject.GetComponents<IHoverable>())
-        {
-            hoverable.OnHoverEnd();
-        }
-    }
-
 }

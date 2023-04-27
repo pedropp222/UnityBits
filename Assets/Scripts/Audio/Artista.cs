@@ -3,110 +3,116 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces;
 using UnityEngine;
+using Audio.Config;
+using Controladores;
 
-public class Artista : MonoBehaviour, IGravavelMusica
+namespace Audio
 {
-    public string nomeArtista;
-
-    public List<InstrumentoConfiguracao> instrumentosConfiguracoes;
-
-    private List<Instrumento> objinstrumentos;
-
-    private void Start()
+    public class Artista : MonoBehaviour, IGravavelMusica
     {
-        objinstrumentos = new List<Instrumento>();
-        if (instrumentosConfiguracoes == null)
+        public string nomeArtista;
+
+        public List<InstrumentoConfiguracao> instrumentosConfiguracoes;
+
+        private List<Instrumento> objinstrumentos;
+
+        private void Start()
         {
-            instrumentosConfiguracoes = new List<InstrumentoConfiguracao>();
-        }
-
-        foreach(var instrumento in instrumentosConfiguracoes)
-        {
-            ProcessarConfiguracao(instrumento);
-        }
-    }
-
-    public void AdicionarConfiguracao(InstrumentoConfiguracao configuracao)
-    {
-        instrumentosConfiguracoes.Add(configuracao);
-        ProcessarConfiguracao(configuracao);
-    }
-
-    private void ProcessarConfiguracao(InstrumentoConfiguracao instrumento)
-    {
-        //Criacao do movimentoSom
-        string parteCorpo = instrumento.parteCorpo;
-
-        GameObject parte = UtilsController.instancia.EncontrarObjetoChild(transform, parteCorpo);
-
-        if (parte == null)
-        {
-            Debug.LogError("ERRO: NAO ENCONTROU A PARTE DO CORPO " + parteCorpo + " PARA CRIAR O INSTRUMENTO");
-            return;
-        }
-
-        Instrumento inst = parte.AddComponent<Instrumento>();
-        MovimentoSom movimento = parte.AddComponent<MovimentoSom>();
-
-        inst.movimento = movimento;
-
-        objinstrumentos.Add(inst);
-
-        //Transformacoes dos ossos do personagem
-        foreach (var config in instrumento.transformacoesOssos)
-        {
-            GameObject osso = UtilsController.instancia.EncontrarObjetoChild(transform, config.nomeParte);
-
-            if (osso == null)
+            objinstrumentos = new List<Instrumento>();
+            if (instrumentosConfiguracoes == null)
             {
-                Debug.LogError("ERRO: NAO ENCONTROU A PARTE DO CORPO " + config.nomeParte + " PARA RODAR O OSSO");
-                continue;
+                instrumentosConfiguracoes = new List<InstrumentoConfiguracao>();
             }
 
-            osso.transform.localEulerAngles = config.rotacaoLocal;
+            foreach (var instrumento in instrumentosConfiguracoes)
+            {
+                ProcessarConfiguracao(instrumento);
+            }
         }
 
-        //Instanciar objetos        
-
-        foreach (var config in instrumento.configuracoesInstanciacao)
+        public void AdicionarConfiguracao(InstrumentoConfiguracao configuracao)
         {
-            parte = null;
-            if (config.nomeParente.Length != 0)
-            {
-                parteCorpo = config.nomeParente;
-                parte = UtilsController.instancia.EncontrarObjetoChild(transform, parteCorpo);
+            instrumentosConfiguracoes.Add(configuracao);
+            ProcessarConfiguracao(configuracao);
+        }
 
-                if (parte == null)
-                {
-                    Debug.LogError("ERRO: NAO ENCONTROU A PARTE DO CORPO " + parte + " PARA INSTANCIAR O OBJETO");
-                    continue;
-                }
-            }
+        private void ProcessarConfiguracao(InstrumentoConfiguracao instrumento)
+        {
+            //Criacao do movimentoSom
+            string parteCorpo = instrumento.parteCorpo;
 
-            GameObject obj = Instantiate(config.objeto);
+            GameObject parte = UtilsController.instancia.EncontrarObjetoChild(transform, parteCorpo);
 
             if (parte == null)
             {
-                obj.transform.position = config.posicaoLocal;
-                obj.transform.eulerAngles = config.rotacaoLocal;
+                Debug.LogError("ERRO: NAO ENCONTROU A PARTE DO CORPO " + parteCorpo + " PARA CRIAR O INSTRUMENTO");
+                return;
             }
-            else
+
+            Instrumento inst = parte.AddComponent<Instrumento>();
+            MovimentoSom movimento = parte.AddComponent<MovimentoSom>();
+
+            inst.movimento = movimento;
+
+            objinstrumentos.Add(inst);
+
+            //Transformacoes dos ossos do personagem
+            foreach (var config in instrumento.transformacoesOssos)
             {
-                obj.transform.SetParent(parte.transform, true);
-                obj.transform.localPosition = config.posicaoLocal;
-                obj.transform.localEulerAngles = config.rotacaoLocal;
+                GameObject osso = UtilsController.instancia.EncontrarObjetoChild(transform, config.nomeParte);
+
+                if (osso == null)
+                {
+                    Debug.LogError("ERRO: NAO ENCONTROU A PARTE DO CORPO " + config.nomeParte + " PARA RODAR O OSSO");
+                    continue;
+                }
+
+                osso.transform.localEulerAngles = config.rotacaoLocal;
             }
+
+            //Instanciar objetos        
+
+            foreach (var config in instrumento.configuracoesInstanciacao)
+            {
+                parte = null;
+                if (config.nomeParente.Length != 0)
+                {
+                    parteCorpo = config.nomeParente;
+                    parte = UtilsController.instancia.EncontrarObjetoChild(transform, parteCorpo);
+
+                    if (parte == null)
+                    {
+                        Debug.LogError("ERRO: NAO ENCONTROU A PARTE DO CORPO " + parte + " PARA INSTANCIAR O OBJETO");
+                        continue;
+                    }
+                }
+
+                GameObject obj = Instantiate(config.objeto);
+
+                if (parte == null)
+                {
+                    obj.transform.position = config.posicaoLocal;
+                    obj.transform.eulerAngles = config.rotacaoLocal;
+                }
+                else
+                {
+                    obj.transform.SetParent(parte.transform, true);
+                    obj.transform.localPosition = config.posicaoLocal;
+                    obj.transform.localEulerAngles = config.rotacaoLocal;
+                }
+            }
+
+            OnCarregouInstrumento?.Invoke(this, inst);
         }
 
-        OnCarregouInstrumento?.Invoke(this, inst);
-    }
+        public void OnGravar(string caminho)
+        {
+            //TODO: implementar isto claro, usar uma cena para gravar / carregar facilmente como JSON ou assim
+            Debug.Log("Implementar save");
+        }
 
-    public void OnGravar(string caminho)
-    {
-        //TODO: implementar isto claro, usar uma cena para gravar / carregar facilmente como JSON ou assim
-        Debug.Log("Implementar save");
+        public EventHandler<Instrumento> OnCarregouInstrumento;
     }
-
-    public EventHandler<Instrumento> OnCarregouInstrumento;
 }

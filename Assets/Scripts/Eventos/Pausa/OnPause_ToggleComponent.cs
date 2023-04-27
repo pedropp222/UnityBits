@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 
 /// <summary>
@@ -8,28 +9,31 @@ using UnityEngine;
 /// quisermos continuar a jogar.
 /// Tambem e possivel inverter as acoes.
 /// </summary>
-public class OnPause_ToggleComponent : MonoBehaviour, IPausable
+namespace Eventos.Pausa
 {
-    //Lista de componentes
-    public MonoBehaviour[] componentes;
-
-    [Tooltip("Se falso, vai desligar os componentes ao fazer pausa, e liga-los ao continuar. Se verdadeiro, faz o inverso.")]
-    public bool invert;
-
-    void Start()
+    public class OnPause_ToggleComponent : MonoBehaviour, IPausable
     {
-        for (int i = 0; i < componentes.Length; i++)
+        //Lista de componentes
+        public MonoBehaviour[] componentes;
+
+        [Tooltip("Se falso, vai desligar os componentes ao fazer pausa, e liga-los ao continuar. Se verdadeiro, faz o inverso.")]
+        public bool invert;
+
+        void Start()
         {
-            componentes[i].enabled = !invert;
+            for (int i = 0; i < componentes.Length; i++)
+            {
+                componentes[i].enabled = !invert;
+            }
         }
-    }
 
-    //Chamado automaticamente pelo PausaControlador
-    public void OnPause(bool state)
-    {
-        for (int i = 0; i < componentes.Length; i++)
+        //Chamado automaticamente pelo PausaControlador
+        public void OnPause(bool state)
         {
-            componentes[i].enabled = invert ? state : !state;
+            for (int i = 0; i < componentes.Length; i++)
+            {
+                componentes[i].enabled = invert ? state : !state;
+            }
         }
     }
 }

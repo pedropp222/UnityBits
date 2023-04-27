@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnTrigger_AbrirPalcoGUIPanel : MonoBehaviour
+namespace Eventos
 {
-
-    private void OnTriggerEnter(Collider other)
+    public class OnTrigger_AbrirPalcoGUIPanel : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+
+        private void OnTriggerEnter(Collider other)
         {
-            GUIPalcoPainel.Abrir();
+            if (other.CompareTag("Player"))
+            {
+                
+            }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private void OnTriggerExit(Collider other)
         {
-            GUIPalcoPainel.Fechar();
+            if (other.CompareTag("Player"))
+            {
+                
+            }
         }
     }
 }

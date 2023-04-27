@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Classe para mover uma parte do corpo de um artista, baseado no som que o instrumento
@@ -11,68 +6,70 @@ using UnityEngine;
 /// bastante tempo, com algumas pequenas alterações para ficar melhor apresentável, mas
 /// vai necessitar de uma revisão para melhor a qualidade.
 /// </summary>
-[RequireComponent(typeof(Instrumento))]
-public class MovimentoSom : MonoBehaviour
+namespace Audio
 {
-    private Transform parte;
-    
-    private float intensidade;
-    private float suavidade;
-
-    private AudioSource audioS;
-
-    float rotacaoInicial;
-    float rotAtual;
-    float[] espectro;
-
-    /// <summary>
-    /// Este script requer o audio source do instrumento para funcionar
-    /// </summary>
-    private void Start()
+    [RequireComponent(typeof(Instrumento))]
+    public class MovimentoSom : MonoBehaviour
     {
-        parte = transform;
-        rotacaoInicial = parte.localEulerAngles.x;
-        rotAtual = rotacaoInicial;    
-        espectro = new float[256];
-    }
+        private Transform parte;
 
-    //Apenas o Instrumento vai ou pode chamar este metodo, quando o carregador finalmente carrega um som.
-    public void SetAudioSource(AudioSource audio)
-    {
-        audioS = audio;
-    }
+        private float intensidade;
+        private float suavidade;
 
-    private void Update()
-    {
-        if (audioS == null || parte == null) return;
+        private AudioSource audioS;
 
-        float media = 0f;
+        float rotacaoInicial;
+        float rotAtual;
+        float[] espectro;
 
-        audioS.GetOutputData(espectro, 0);
-
-        for(int i = 0; i < espectro.Length; i++)
+        /// <summary>
+        /// Este script requer o audio source do instrumento para funcionar
+        /// </summary>
+        private void Start()
         {
-            media += espectro[i] * intensidade;
+            parte = transform;
+            rotacaoInicial = parte.localEulerAngles.x;
+            rotAtual = rotacaoInicial;
+            espectro = new float[256];
         }
 
-        if (media < 0f) media *= -1f;
+        //Apenas o Instrumento vai ou pode chamar este metodo, quando o carregador finalmente carrega um som.
+        public void SetAudioSource(AudioSource audio)
+        {
+            audioS = audio;
+        }
 
-        rotAtual = Mathf.Lerp(rotAtual, rotacaoInicial + media, 1f-suavidade);
+        private void Update()
+        {
+            if (audioS == null || parte == null) return;
 
-        Vector3 novaRot = new Vector3(rotAtual, parte.localEulerAngles.y, parte.localEulerAngles.z);
+            float media = 0f;
 
-        parte.localEulerAngles = novaRot;        
+            audioS.GetOutputData(espectro, 0);
+
+            for (int i = 0; i < espectro.Length; i++)
+            {
+                media += espectro[i] * intensidade;
+            }
+
+            if (media < 0f) media *= -1f;
+
+            rotAtual = Mathf.Lerp(rotAtual, rotacaoInicial + media, 1f - suavidade);
+
+            Vector3 novaRot = new Vector3(rotAtual, parte.localEulerAngles.y, parte.localEulerAngles.z);
+
+            parte.localEulerAngles = novaRot;
+        }
+
+        public void SetIntensidade(float valor)
+        {
+            intensidade = valor;
+        }
+
+        public void SetSuavidade(float valor)
+        {
+            suavidade = valor;
+        }
+
     }
-
-    public void SetIntensidade(float valor)
-    {
-        intensidade = valor;
-    }
-
-    public void SetSuavidade(float valor)
-    {
-        suavidade = valor;
-    }
-
 }
-

@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using Audio;
+using Interfaces;
 using UnityEngine;
 
-public class OnClick_AbrirExploradorMusica : MonoBehaviour, IInteragivel
+namespace Eventos
 {
-    public ExploradorAudio explorador;
-    public TocadorAudio tocadorAudio;
-
-    public void OnInteragir(RatoBotao botao)
+    public class OnClick_AbrirExploradorMusica : MonoBehaviour, IInteragivel
     {
-        if (botao == RatoBotao.ESQUERDO)
+        public ExploradorAudio explorador;
+        public TocadorAudio tocadorAudio;
+
+        public void OnInteragir(RatoBotao botao)
         {
-            explorador.gameObject.SetActive(true);
-            explorador.Mostrar(tocadorAudio);
+            if (botao == RatoBotao.ESQUERDO)
+            {
+                explorador.gameObject.SetActive(true);
+                explorador.Mostrar(tocadorAudio);
+            }
         }
     }
 }

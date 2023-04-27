@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 

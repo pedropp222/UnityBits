@@ -1,14 +1,20 @@
+using Audio;
+using Controladores;
+using Interfaces;
 using UnityEngine;
 
-[RequireComponent(typeof(Artista))]
-public class OnClick_AdicionarArtista : MonoBehaviour, IInteragivel
+namespace Eventos
 {
-    public void OnInteragir(RatoBotao botao)
+    [RequireComponent(typeof(Artista))]
+    public class OnClick_AdicionarArtista : MonoBehaviour, IInteragivel
     {
-        if (botao == RatoBotao.ESQUERDO)
+        public void OnInteragir(RatoBotao botao)
         {
-            ProjetoControlador.instancia.AdicionarArtista(GetComponent<Artista>());
-            Destroy(this);
+            if (botao == RatoBotao.ESQUERDO)
+            {
+                ProjetoControlador.instancia.AdicionarArtista(GetComponent<Artista>());
+                Destroy(this);
+            }
         }
     }
 }
